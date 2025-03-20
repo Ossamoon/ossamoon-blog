@@ -2,6 +2,7 @@
 import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import Button from '../components/Button.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 ---
 
@@ -43,6 +44,11 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 				<a href="https://github.com/Charca/astro-blog-template">astro-blog-template</a>
 				by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
 			</p>
+
+			<div class="flex space-x-4 mt-6">
+				<Button text="Primary Button" href="/blog" />
+				<Button text="Secondary Button" variant="secondary" href="/about" />
+			</div>
 		</main>
 		<Footer />
 	</body>
