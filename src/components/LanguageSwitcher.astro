@@ -1,0 +1,97 @@
+---
+import { LOCALES, type Locale } from '../consts';
+import { getLocaleFromUrl, getLocalizedUrl } from '../utils/i18n';
+
+const currentPath = Astro.url.pathname;
+const currentLocale = getLocaleFromUrl(currentPath);
+
+// Language names in their native language
+const languageNames: Record<Locale, string> = {
+  en: 'English',
+  ja: '日本語'
+};
+---
+
+<div class="language-switcher">
+  <select id="language-select" aria-label="Select language">
+    {LOCALES.map((locale) => (
+      <option value={locale} selected={locale === currentLocale}>
+        {languageNames[locale]}
+      </option>
+    ))}
+  </select>
+</div>
+
+<script define:vars={{ currentPath, LOCALES }}>
+  document.addEventListener('DOMContentLoaded', () => {
+    const languageSelect = document.getElementById('language-select');
+    
+    if (languageSelect) {
+      languageSelect.addEventListener('change', (event) => {
+        const target = event.target;
+        if (!(target instanceof HTMLSelectElement)) return;
+        const newLocale = target.value;
+        
+        // Get the current URL
+        const currentUrl = new URL(window.location.href);
+        const pathname = currentUrl.pathname;
+        
+        // Split the pathname into segments
+        const segments = pathname.split('/').filter(Boolean);
+        
+        // Check if the first segment is a locale
+        const hasLocalePrefix = LOCALES.includes(segments[0]);
+        
+        // Construct the new URL
+        let newPathname;
+        if (hasLocalePrefix) {
+          // Replace the locale
+          segments[0] = newLocale;
+          newPathname = '/' + segments.join('/');
+        } else if (newLocale === 'en') {
+          // Keep the same path for default locale
+          newPathname = pathname;
+        } else {
+          // Add the locale prefix
+          newPathname = '/' + newLocale + pathname;
+        }
+        
+        // Navigate to the new URL
+        window.location.href = newPathname;
+      });
+    }
+  });
+</script>
+
+<style>
+  .language-switcher {
+    position: relative;
+  }
+  
+  select {
+    appearance: none;
+    background-color: var(--bg);
+    border: 1px solid var(--gray-light);
+    border-radius: 4px;
+    padding: 0.3rem 1.5rem 0.3rem 0.5rem;
+    font-size: 0.9rem;
+    cursor: pointer;
+    color: var(--text);
+  }
+  
+  .language-switcher::after {
+    content: "▼";
+    font-size: 0.7rem;
+    position: absolute;
+    right: 0.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: var(--text);
+  }
+  
+  select:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: 1px;
+  }
+</style>

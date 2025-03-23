@@ -1,0 +1,20 @@
+---
+import { type CollectionEntry, getCollection } from 'astro:content';
+
+// This function is required for dynamic routes
+export async function getStaticPaths() {
+	const posts = await getCollection('blog');
+	return posts.map((post) => ({
+		params: { slug: post.id },
+	}));
+}
+
+// Redirect /en/blog/[slug] to /blog/[slug]
+const { slug } = Astro.params;
+const redirectPath = `/blog/${slug}`;
+---
+
+<meta http-equiv="refresh" content={`0;url=${redirectPath}`} />
+<script define:vars={{ redirectPath }}>
+  window.location.pathname = redirectPath;
+</script>

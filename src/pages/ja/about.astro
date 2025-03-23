@@ -1,0 +1,38 @@
+---
+import Layout from '../../layouts/BlogPost.astro';
+import { SITE_DATA } from '../../consts';
+
+const { title } = SITE_DATA.ja;
+---
+
+<Layout
+	title={`About | ${title}`}
+	description="私について"
+	pubDate={new Date('August 08, 2021')}
+	heroImage="/blog-placeholder-about.jpg"
+>
+	<p>
+		このブログは、Astroを使用して構築されたシンプルなブログウェブサイトです。
+		これは、Astroの機能を紹介するためのデモサイトであり、
+		個人のブログやポートフォリオサイトを構築するための出発点として使用できます。
+	</p>
+
+	<p>
+		このテンプレートには、以下のような機能が含まれています：
+	</p>
+
+	<ul>
+		<li>✅ 最小限でありながら完全な機能を備えたブログ</li>
+		<li>✅ SEOフレンドリーなメタタグ</li>
+		<li>✅ レスポンシブデザイン</li>
+		<li>✅ 優れたアクセシビリティ</li>
+		<li>✅ Markdown & MDXのサポート</li>
+		<li>✅ RSS Feed</li>
+		<li>✅ サイトマップ</li>
+	</ul>
+
+	<p>
+		このテンプレートを使用して、あなた自身のブログを作成してみてください。
+		Astroの詳細については、<a href="https://astro.build/docs">公式ドキュメント</a>をご覧ください。
+	</p>
+</Layout>
