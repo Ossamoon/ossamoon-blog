@@ -1,63 +1,52 @@
 ---
-import { LOCALES, type Locale } from '../consts';
-import { getLocaleFromUrl, getLocalizedUrl } from '../utils/i18n';
+import { LOCALES, LANGS, type LOCALE } from "../../astro.config";
+import { getRelativeLocaleUrl } from "astro:i18n";
 
-const currentPath = Astro.url.pathname;
-const currentLocale = getLocaleFromUrl(currentPath);
+const currentLocale = (Astro.currentLocale as LOCALE) ?? "en";
 
-// Language names in their native language
-const languageNames: Record<Locale, string> = {
-  en: 'English',
-  ja: '日本語'
-};
+// Generate URLs for each locale
+const localeUrls: Record<LOCALE, string> = {} as Record<LOCALE, string>;
+LOCALES.forEach((locale) => {
+  // Get the current path without the locale prefix
+  const currentPath = Astro.url.pathname;
+  const segments = currentPath.split("/").filter(Boolean);
+
+  // Remove the locale segment if it exists
+  let pathWithoutLocale = currentPath;
+  if (segments.length > 0 && LOCALES.includes(segments[0] as LOCALE)) {
+    pathWithoutLocale = "/" + segments.slice(1).join("/");
+  }
+
+  // For the default locale with prefixDefaultLocale: true
+  // we need to explicitly include the locale in the URL
+  localeUrls[locale] = getRelativeLocaleUrl(locale, pathWithoutLocale);
+});
 ---
 
 <div class="language-switcher">
   <select id="language-select" aria-label="Select language">
-    {LOCALES.map((locale) => (
-      <option value={locale} selected={locale === currentLocale}>
-        {languageNames[locale]}
-      </option>
-    ))}
+    {
+      LOCALES.map((locale) => (
+        <option value={locale} selected={locale === currentLocale}>
+          {LANGS[locale]}
+        </option>
+      ))
+    }
   </select>
 </div>
 
-<script define:vars={{ currentPath, LOCALES }}>
-  document.addEventListener('DOMContentLoaded', () => {
-    const languageSelect = document.getElementById('language-select');
-    
+<script define:vars={{ localeUrls }}>
+  document.addEventListener("DOMContentLoaded", () => {
+    const languageSelect = document.getElementById("language-select");
+
     if (languageSelect) {
-      languageSelect.addEventListener('change', (event) => {
+      languageSelect.addEventListener("change", (event) => {
         const target = event.target;
         if (!(target instanceof HTMLSelectElement)) return;
         const newLocale = target.value;
-        
-        // Get the current URL
-        const currentUrl = new URL(window.location.href);
-        const pathname = currentUrl.pathname;
-        
-        // Split the pathname into segments
-        const segments = pathname.split('/').filter(Boolean);
-        
-        // Check if the first segment is a locale
-        const hasLocalePrefix = LOCALES.includes(segments[0]);
-        
-        // Construct the new URL
-        let newPathname;
-        if (hasLocalePrefix) {
-          // Replace the locale
-          segments[0] = newLocale;
-          newPathname = '/' + segments.join('/');
-        } else if (newLocale === 'en') {
-          // Keep the same path for default locale
-          newPathname = pathname;
-        } else {
-          // Add the locale prefix
-          newPathname = '/' + newLocale + pathname;
-        }
-        
-        // Navigate to the new URL
-        window.location.href = newPathname;
+
+        // Navigate to the pre-computed URL for this locale
+        window.location.href = localeUrls[newLocale];
       });
     }
   });
@@ -67,7 +56,7 @@ const languageNames: Record<Locale, string> = {
   .language-switcher {
     position: relative;
   }
-  
+
   select {
     appearance: none;
     background-color: var(--bg);
@@ -78,7 +67,7 @@ const languageNames: Record<Locale, string> = {
     cursor: pointer;
     color: var(--text);
   }
-  
+
   .language-switcher::after {
     content: "▼";
     font-size: 0.7rem;
@@ -89,7 +78,7 @@ const languageNames: Record<Locale, string> = {
     pointer-events: none;
     color: var(--text);
   }
-  
+
   select:focus {
     outline: 2px solid var(--accent);
     outline-offset: 1px;

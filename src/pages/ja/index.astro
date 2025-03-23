@@ -1,56 +1,71 @@
 ---
-import BaseHead from '../../components/BaseHead.astro';
-import Header from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
-import Button from '../../components/Button.astro';
-import { SITE_DATA } from '../../consts';
-
-const { title, description } = SITE_DATA.ja;
+import BaseHead from "../../components/BaseHead.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import Button from "../../components/Button.astro";
 ---
 
 <!doctype html>
 <html lang="ja">
-	<head>
-		<BaseHead title={title} description={description} />
-	</head>
-	<body>
-		<Header />
-		<main>
-			<h1>🧑‍🚀 こんにちは、宇宙飛行士！</h1>
-			<p>
-				公式<a href="https://astro.build/">Astro</a>ブログスターターテンプレートへようこそ。このテンプレートは、
-				Astroを使用して個人のウェブサイト、ブログ、またはポートフォリオを構築したい人のための、
-				軽量で最小限のスタイルの出発点として機能します。
-			</p>
-			<p>
-				このテンプレートには、<code>astro.config.mjs</code>ファイルにすでに設定されているいくつかの統合機能があります。
-				<a href="https://astro.build/integrations">Astro Integrations</a>を使用して、
-				TailwindやReact、Vueなどのツールをプロジェクトに追加するようにセットアップをカスタマイズできます。
-			</p>
-			<p>テンプレートの使い方についていくつかのアイデアを紹介します：</p>
-			<ul>
-				<li><code>src/pages/index.astro</code>でこのページを編集する</li>
-				<li><code>src/components/Header.astro</code>でサイトヘッダー項目を編集する</li>
-				<li><code>src/components/Footer.astro</code>でフッターに名前を追加する</li>
-				<li><code>src/content/blog/</code>に含まれるブログ投稿をチェックする</li>
-				<li><code>src/layouts/BlogPost.astro</code>でブログ投稿ページのレイアウトをカスタマイズする</li>
-			</ul>
-			<p>
-				楽しんでください！行き詰まったら、
-				<a href="https://docs.astro.build/">ドキュメントを読む</a>か、
-				<a href="https://astro.build/chat">Discordに参加して</a>質問してください。
-			</p>
-			<p>
-				もう少しパーソナリティのあるブログテンプレートをお探しですか？
-				<a href="https://twitter.com/Charca">Maxi Ferreira</a>による
-				<a href="https://github.com/Charca/astro-blog-template">astro-blog-template</a>をチェックしてみてください。
-			</p>
+  <head>
+    <BaseHead
+      title={"Ossamoon Blog"}
+      description={"Ossamoonのブログへようこそ!"}
+    />
+  </head>
+  <body>
+    <Header />
+    <main>
+      <h1>🧑‍🚀 こんにちは、宇宙飛行士！</h1>
+      <p>
+        公式<a href="https://astro.build/">Astro</a
+        >ブログスターターテンプレートへようこそ。このテンプレートは、
+        Astroを使用して個人のウェブサイト、ブログ、またはポートフォリオを構築したい人のための、
+        軽量で最小限のスタイルの出発点として機能します。
+      </p>
+      <p>
+        このテンプレートには、<code>astro.config.mjs</code
+        >ファイルにすでに設定されているいくつかの統合機能があります。
+        <a href="https://astro.build/integrations">Astro Integrations</a
+        >を使用して、
+        TailwindやReact、Vueなどのツールをプロジェクトに追加するようにセットアップをカスタマイズできます。
+      </p>
+      <p>テンプレートの使い方についていくつかのアイデアを紹介します：</p>
+      <ul>
+        <li><code>src/pages/index.astro</code>でこのページを編集する</li>
+        <li>
+          <code>src/components/Header.astro</code>でサイトヘッダー項目を編集する
+        </li>
+        <li>
+          <code>src/components/Footer.astro</code>でフッターに名前を追加する
+        </li>
+        <li>
+          <code>src/content/blog/</code>に含まれるブログ投稿をチェックする
+        </li>
+        <li>
+          <code>src/layouts/BlogPost.astro</code
+          >でブログ投稿ページのレイアウトをカスタマイズする
+        </li>
+      </ul>
+      <p>
+        楽しんでください！行き詰まったら、
+        <a href="https://docs.astro.build/">ドキュメントを読む</a>か、
+        <a href="https://astro.build/chat">Discordに参加して</a
+        >質問してください。
+      </p>
+      <p>
+        もう少しパーソナリティのあるブログテンプレートをお探しですか？
+        <a href="https://twitter.com/Charca">Maxi Ferreira</a>による
+        <a href="https://github.com/Charca/astro-blog-template"
+          >astro-blog-template</a
+        >をチェックしてみてください。
+      </p>
 
-			<div class="flex space-x-4 mt-6">
-				<Button text="プライマリーボタン" href="/blog" />
-				<Button text="セカンダリーボタン" variant="secondary" href="/about" />
-			</div>
-		</main>
-		<Footer />
-	</body>
+      <div class="flex space-x-4 mt-6">
+        <Button text="プライマリーボタン" href="/blog" />
+        <Button text="セカンダリーボタン" variant="secondary" href="/about" />
+      </div>
+    </main>
+    <Footer />
+  </body>
 </html>
