@@ -1,37 +1,33 @@
 ---
-import BaseLayout from '../../layouts/Base.astro';
+import Layout from "../../layouts/BlogPost.astro";
 ---
 
-<BaseLayout
-	title={`About | Ossamoon`}
-	description="About Ossamoon"
-	pubDate={new Date('August 08 2021')}
-	heroImage="/blog-placeholder-about.jpg"
+<Layout
+  title={`About | Ossamoon Blog`}
+  description="About Ossamoon"
+  pubDate={new Date("August 08, 2021")}
+  heroImage="/blog-placeholder-about.jpg"
 >
-  <article>
-    <p>
-      This blog is a simple blog website built with Astro.
-      It's a demo site to showcase Astro's capabilities and can be used as a starting point
-      for building your own personal blog or portfolio site.
-    </p>
+  <p>
+    This blog is a simple blog website built with Astro. It's a demo site to
+    showcase Astro's capabilities and can be used as a starting point for
+    building your own personal blog or portfolio site.
+  </p>
 
-    <p>
-      This template includes the following features:
-    </p>
+  <p>This template includes the following features:</p>
 
-    <ul>
-      <li>✅ Minimal and fully functional blog</li>
-      <li>✅ SEO-friendly meta tags</li>
-      <li>✅ Responsive design</li>
-      <li>✅ Great accessibility</li>
-      <li>✅ Markdown & MDX support</li>
-      <li>✅ RSS Feed</li>
-      <li>✅ Sitemap</li>
-    </ul>
+  <ul>
+    <li>✅ Minimal and fully functional blog</li>
+    <li>✅ SEO-friendly meta tags</li>
+    <li>✅ Responsive design</li>
+    <li>✅ Great accessibility</li>
+    <li>✅ Markdown & MDX support</li>
+    <li>✅ RSS Feed</li>
+    <li>✅ Sitemap</li>
+  </ul>
 
-    <p>
-      Use this template to create your own blog.
-      For more information about Astro, check out the <a href="https://astro.build/docs">official documentation</a>.
-    </p>
-  </article>
-</BaseLayout>
+  <p>
+    Use this template to create your own blog. For more information about Astro,
+    check out the <a href="https://astro.build/docs">official documentation</a>.
+  </p>
+</Layout>
