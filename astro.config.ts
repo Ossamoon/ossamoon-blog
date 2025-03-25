@@ -19,11 +19,8 @@ export default defineConfig({
   integrations: [mdx(), sitemap()],
 
   i18n: {
-    defaultLocale: "en",
-    locales: ["en", { path: "ja", codes: ["ja", "ja-JP"] }],
-    routing: {
-      prefixDefaultLocale: true,
-    },
+    defaultLocale: "ja",
+    locales: ["en", "ja"],
   },
 
   vite: {
